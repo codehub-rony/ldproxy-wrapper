@@ -18,8 +18,19 @@ collection.onReady(() => {
     }),
   });
 
-  let mapboxStyle = collection.getStyleNames(<styleId>);
-
-  map.addLayer(mapboxStyle);
+  map.addLayer(tileLayer);
 });
+```
+
+To style the above created vector layer, we can use the `applyStyle` function
+
+```
+let url = collection.getStyleUrl(<styleId>)
+fetch(url)
+  .then((resp) => {
+    return resp.json();
+  })
+  .then((json) => {
+    applyStyle(tileLayer, JSON.stringify(json));
+  });
 ```
